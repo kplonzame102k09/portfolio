@@ -1,0 +1,196 @@
+/* =========================================================
+   BASE STYLES — reset, variables, typography, global
+   ========================================================= */
+
+:root {
+  /* Palette */
+  --bg: #0a0e14;
+  --bg-soft: #0d1520;
+  --bg-elev: #111a26;
+  --bg-glass: rgba(13, 21, 32, 0.72);
+
+  --neon: #00ff9f;
+  --neon-dim: rgba(0, 255, 159, 0.12);
+  --cyan: #00d4ff;
+  --cyan-dim: rgba(0, 212, 255, 0.12);
+  --purple: #9d4dff;
+  --purple-dim: rgba(157, 77, 255, 0.12);
+  --red: #ff5c6c;
+  --yellow: #ffd166;
+  --green: #00ff9f;
+
+  --text: #e2e8f0;
+  --text-muted: #8b96a8;
+  --text-faint: #5b6577;
+
+  --line: rgba(226, 232, 240, 0.08);
+  --line-neon: rgba(0, 255, 159, 0.25);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --speed-fast: 180ms;
+  --speed-med: 320ms;
+  --speed-slow: 640ms;
+
+  /* Type */
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-ui: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  --header-h: 68px;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+}
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--neon);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--cyan);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+}
+
+::selection {
+  background: var(--neon);
+  color: #04120c;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #1d2a3a;
+  border-radius: 6px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-dim);
+}
+
+/* ---------- Shared elements ---------- */
+.hash {
+  color: var(--text-faint);
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--bg-elev);
+  color: var(--text-muted);
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon), var(--cyan), var(--purple));
+  z-index: 1000;
+  box-shadow: 0 0 12px rgba(0, 255, 159, 0.6);
+  transition: width 0.1s linear;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translate(-50%, 160%);
+  background: var(--bg-elev);
+  border: 1px solid var(--line-neon);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(0, 255, 159, 0.15);
+  z-index: 1200;
+  transition: transform var(--speed-med) var(--ease-spring);
+  backdrop-filter: blur(12px);
+}
+.toast.show {
+  transform: translate(-50%, 0);
+}
+.toast .t-cmd {
+  color: var(--cyan);
+}
+
+/* Reduced motion: kill cursor effects */
+@media (hover: none) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}

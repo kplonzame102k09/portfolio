@@ -1,0 +1,370 @@
+/* =========================================================
+   TERMINAL STYLES — hero terminal, overlay, boot log
+   ========================================================= */
+
+/* ---------- Terminal window chrome ---------- */
+
+/* Respect the [hidden] attribute even though these set display elsewhere */
+.term-overlay[hidden],
+.terminal-prompt-line[hidden],
+.term-overlay-window[hidden] {
+  display: none;
+}
+
+.terminal {
+  width: min(720px, 100%);
+  background: var(--bg-elev);
+  border: 1px solid var(--line-neon);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-align: left;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 255, 159, 0.05),
+    0 0 60px rgba(0, 255, 159, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.32);
+  border-bottom: 1px solid var(--line);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot.red { background: #ff5f57; box-shadow: 0 0 6px rgba(255, 95, 87, 0.5); }
+.dot.yellow { background: #febc2e; box-shadow: 0 0 6px rgba(254, 188, 46, 0.5); }
+.dot.green { background: #28c840; box-shadow: 0 0 6px rgba(40, 200, 64, 0.5); }
+
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+  letter-spacing: 0.02em;
+}
+.terminal-status {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--green);
+  background: rgba(0, 255, 159, 0.08);
+  border: 1px solid rgba(0, 255, 159, 0.2);
+  padding: 2px 8px;
+  border-radius: 999px;
+  animation: brandPulse 3s ease-in-out infinite;
+}
+.terminal-out {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.terminal-body {
+  padding: 20px 20px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.85;
+  min-height: 240px;
+  color: var(--text-muted);
+  overflow-x: auto;
+}
+.terminal-hero .terminal-body {
+  min-height: 250px;
+}
+
+/* Boot / log line coloring */
+.log-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.log-ok { color: var(--green); }
+.log-info { color: var(--cyan); }
+.log-warn { color: var(--yellow); }
+.log-err { color: var(--red); }
+.log-faint { color: var(--text-faint); }
+.log-neon { color: var(--neon); text-shadow: 0 0 12px rgba(0, 255, 159, 0.5); }
+.log-bracket { color: var(--text-faint); }
+
+.boot-progress {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+/* Prompt */
+.terminal-prompt-line {
+  padding: 0 20px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: baseline;
+  min-height: 28px;
+}
+
+.prompt-user {
+  color: var(--green);
+  font-weight: 500;
+}
+.prompt-path {
+  color: var(--cyan);
+  font-weight: 500;
+}
+.prompt-caret {
+  display: inline-block;
+  width: 9px;
+  height: 1.1em;
+  background: var(--green);
+  margin-left: 6px;
+  animation: blink 1s steps(1) infinite;
+  box-shadow: 0 0 10px rgba(0, 255, 159, 0.6);
+  vertical-align: text-bottom;
+}
+
+/* Interactive hero command line */
+.hero-command-line {
+  width: min(720px, 100%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-glass);
+  border: 1px solid var(--line-neon);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  backdrop-filter: blur(10px);
+  transition: border-color var(--speed-fast), box-shadow var(--speed-fast);
+}
+.hero-command-line:focus-within {
+  border-color: var(--neon);
+  box-shadow: 0 0 0 3px var(--neon-dim), 0 0 24px rgba(0, 255, 159, 0.15);
+}
+.hero-command-line input {
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--text);
+  min-width: 0;
+}
+.hero-command-line input::placeholder {
+  color: var(--text-faint);
+}
+.input-caret {
+  width: 9px;
+  height: 1.1em;
+  background: var(--green);
+  animation: blink 1s steps(1) infinite;
+  flex-shrink: 0;
+}
+
+/* ---------- Terminal overlay ---------- */
+.term-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 7, 12, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: overlayIn 0.3s var(--ease-out);
+}
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.term-overlay-window {
+  width: min(860px, 100%);
+  height: min(600px, 80vh);
+  background: var(--bg-elev);
+  border: 1px solid var(--line-neon);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7), 0 0 80px rgba(0, 255, 159, 0.07);
+  animation: windowIn 0.35s var(--ease-spring);
+}
+@keyframes windowIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+.term-overlay-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  scroll-behavior: smooth;
+}
+
+.term-overlay-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.25);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+}
+.term-overlay-input input {
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--text);
+  min-width: 0;
+  caret-color: var(--green);
+}
+
+/* Overlay command output blocks */
+.out-block {
+  margin-bottom: 14px;
+}
+.out-command {
+  color: var(--cyan);
+  margin-bottom: 6px;
+}
+.out-command .ps {
+  color: var(--text-faint);
+}
+.out-content {
+  padding-left: 4px;
+  border-left: 2px solid var(--line-neon);
+  padding-left: 14px;
+  margin-left: 4px;
+}
+.out-help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 4px 18px;
+}
+.out-help-cmd {
+  color: var(--neon);
+  font-family: var(--font-mono);
+}
+.out-help-desc {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.out-item {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+}
+.out-item .oi-k {
+  color: var(--purple);
+  min-width: 82px;
+  flex-shrink: 0;
+}
+.out-item .oi-v {
+  color: var(--text);
+}
+.out-item .oi-v a {
+  color: var(--cyan);
+}
+.out-item .oi-v a:hover {
+  color: var(--neon);
+  text-decoration: underline;
+}
+
+.out-skill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 0;
+}
+.out-skill-name {
+  min-width: 130px;
+  color: var(--text);
+}
+.out-skill-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.out-skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon), var(--cyan));
+  border-radius: 4px;
+  width: 0;
+  transition: width 0.8s var(--ease-out);
+}
+.out-skill-pct {
+  color: var(--cyan);
+  min-width: 40px;
+  text-align: right;
+  font-size: 0.78rem;
+}
+
+.out-project {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.out-project:last-child {
+  border-bottom: none;
+}
+.out-project-title {
+  color: var(--neon);
+  font-weight: 500;
+}
+.out-project-tags {
+  color: var(--text-faint);
+  font-size: 0.76rem;
+  margin-top: 2px;
+}
+.out-project-desc {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.out-art {
+  font-size: 0.6rem;
+  line-height: 1.4;
+  color: var(--neon);
+  opacity: 0.8;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Cursor in overlay */
+.overlay-caret {
+  display: inline-block;
+  width: 9px;
+  height: 1.1em;
+  background: var(--green);
+  animation: blink 1s steps(1) infinite;
+  box-shadow: 0 0 10px rgba(0, 255, 159, 0.6);
+  vertical-align: text-bottom;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .terminal-status {
+    display: none;
+  }
+  .terminal-body {
+    font-size: 0.76rem;
+    padding: 16px 14px 6px;
+  }
+  .term-overlay-body {
+    font-size: 0.8rem;
+    padding: 16px;
+  }
+}

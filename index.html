@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alex Kim — Full-Stack Developer portfolio. Interactive terminal-style developer portfolio with 3D interactive elements." />
+  <title>Kim Philip — Freelance Developer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>&gt;_</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/terminal.css" />
+  <link rel="stylesheet" href="css/effects.css" />
+</head>
+<body>
+  <!-- Custom cursor backdrop -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Scroll progress indicator -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Parallax grid background -->
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- Floating parallax orbs (depth layers) -->
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+  <div class="orb orb-c" aria-hidden="true"></div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="site-header" id="siteHeader">
+    <a href="#home" class="brand" data-scroll>
+      <span class="brand-prompt">&gt;_</span>
+      <span class="brand-name" data-terminal="type">kim@developer</span>
+    </a>
+
+    <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+      <a href="#about" class="nav-link" data-scroll><span class="nav-num">01</span>about</a>
+      <a href="#skills" class="nav-link" data-scroll><span class="nav-num">02</span>skills</a>
+      <a href="#projects" class="nav-link" data-scroll><span class="nav-num">03</span>projects</a>
+      <a href="#experience" class="nav-link" data-scroll><span class="nav-num">04</span>experience</a>
+      <a href="#contact" class="nav-link" data-scroll><span class="nav-num">05</span>contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="terminal-toggle" id="terminalToggle" aria-label="Open terminal">
+        <span class="tt-icon">&gt;_</span>
+        <span class="tt-label">terminal</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== HERO / TERMINAL ==================== -->
+    <section class="hero" id="home">
+      <div class="hero-badge reveal">
+        <span class="pulse-dot"></span>
+        available for freelance &amp; full-time
+      </div>
+
+      <!-- Terminal windows (desktop hero) -->
+      <div class="terminal-hero reveal">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-title">kim@portfolio: ~</span>
+            <span class="terminal-status">● SSH: connected</span>
+          </div>
+          <div class="terminal-body" id="bootLog" aria-live="polite"></div>
+          <div class="terminal-prompt-line" id="heroPromptLine" hidden>
+            <span class="prompt-user">kim@portfolio</span><span class="prompt-path">:~$</span>
+            <span class="prompt-caret" id="heroPromptCaret"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal prompt input (interactive) -->
+      <div class="hero-command-line reveal">
+        <span class="prompt-user">kim@portfolio</span><span class="prompt-path">:~$</span>
+        <input id="commandInput" type="text" autocomplete="off" spellcheck="false" placeholder="type 'help' and press enter" aria-label="Terminal command input" />
+        <span class="input-caret" id="inputCaret"></span>
+      </div>
+
+      <div class="export-section reveal">
+        <h1 class="hero-title" id="heroTitle">
+          <span class="c-structure">const</span>
+          <span class="c-name" data-terminal="type">Kim Philip</span>
+          <span class="c-equals">=</span>
+          <span class="c-brace"></span>
+        </h1>
+        <p class="hero-subtitle" id="typewriter">
+          <span class="type-text" id="typeText"></span><span class="type-caret"></span>
+        </p>
+        <p class="hero-desc">I build fast, elegant web experiences. Full-stack focused on clean architecture, smooth interactions and developer-friendly tooling.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary" data-scroll>
+            <span class="btn-code">./view</span> projects
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="#contact" class="btn btn-ghost" data-scroll>
+            <span class="btn-code">cat</span> contact
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="section about" id="about">
+      <div class="section-head reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title"><span class="hash">//</span> about_me()</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-code reveal">
+          <div class="code-window">
+            <div class="code-bar">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="terminal-title">about.ts</span>
+            </div>
+            <pre class="code-body" id="aboutCode"></pre>
+          </div>
+        </div>
+
+        <div class="about-info reveal">
+          <p class="about-lead" id="aboutLead"></p>
+          <p class="about-text" id="aboutText"></p>
+
+          <div class="stat-grid" id="statGrid"></div>
+
+          <div class="about-tools">
+            <span class="tools-label">currently:</span>
+            <div class="tools-tags" id="currentTags"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section class="section skills" id="skills">
+      <div class="section-head reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title"><span class="hash">//</span> skills()</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="skills-grid" id="skillsGrid"></div>
+    </section>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section class="section projects" id="projects">
+      <div class="section-head reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title"><span class="hash">//</span> selected_projects</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="project-grid" id="projectGrid"></div>
+
+      <div class="more-projects reveal">
+        <a class="btn btn-ghost" href="https://github.com/kplonzame102k09" target="_blank" rel="noopener">
+          <span class="btn-code">git</span> more on github <span class="btn-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==================== EXPERIENCE ==================== -->
+    <section class="section experience" id="experience">
+      <div class="section-head reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title"><span class="hash">//</span> $ experience --log</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="section contact" id="contact">
+      <div class="section-head reveal">
+        <span class="section-num">05</span>
+        <h2 class="section-title"><span class="hash">//</span> secure_channel()</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="contact-wrap reveal">
+        <div class="contact-terminal">
+          <div class="terminal-bar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="terminal-title">contact.sh — port 443</span>
+          </div>
+          <div class="contact-body">
+            <p class="contact-line"><span class="c-comment"># Open a secure channel:</span></p>
+            <div class="contact-channels" id="contactChannels"></div>
+          </div>
+        </div>
+
+        <div class="contact-note">
+          <p class="contact-quote" id="contactQuote">"Let's build something great together."</p>
+          <p class="contact-sub" id="contactSub">I usually respond within 24 hours.</p>
+          <a class="btn btn-primary" href="#" id="emailBtn" target="_blank">
+            <span class="btn-code">mailto</span> send message <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-line"><span class="hash">//</span> &lt;/portfolio&gt;</span>
+      <span class="footer-meta" id="footerMeta"></span>
+      <span class="footer-social" id="footerSocial"></span>
+    </div>
+  </footer>
+
+  <!-- ==================== TERMINAL OVERLAY ==================== -->
+  <div class="term-overlay" id="termOverlay" hidden>
+    <div class="term-overlay-window">
+      <div class="terminal-bar">
+        <span class="dot red" data-close-term></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">kim@portfolio — interactive terminal</span>
+        <span class="terminal-out">press <kbd>esc</kbd> to exit</span>
+      </div>
+      <div class="term-overlay-body" id="termOverlayBody"></div>
+      <div class="term-overlay-input">
+        <span class="prompt-user">kim@portfolio</span><span class="prompt-path">:~$</span>
+        <input id="overlayCommandInput" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command input" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
