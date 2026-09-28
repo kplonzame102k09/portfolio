@@ -88,4 +88,18 @@ portfolio/
 
 MIT — free for personal and commercial use. A shout-out is appreciated but not required.
 
-Built with 💚 and way too much coffee.# portfolio
+Built with 💚 and way too much coffee.
+
+# Kim Philip Lonzame - Portfolio
+
+Personal portfolio website showcasing full-stack development projects and skills.
+
+## Tech Stack
+- HTML, CSS, JavaScript
+- Laravel PHP
+- React
+- Node.js
+- Python
+- TypeScript
+- MySQL
+- Oracle

@@ -57,7 +57,7 @@
         const whoami = document.createElement('div');
         whoami.className = 'log-line';
         whoami.innerHTML =
-          '<span class="log-neon">kim@portfolio</span><span class="log-bracket">:~$</span> <span class="log-info">whoami</span>';
+          '<span class="log-neon">kim@dev</span><span class="log-bracket">:~$</span> <span class="log-info">whoami</span>';
         bootLogEl.appendChild(whoami);
         const res = document.createElement('div');
         res.className = 'log-line';
@@ -326,7 +326,7 @@
       const block = document.createElement('div');
       block.className = 'out-block';
       block.innerHTML =
-        `<div class="out-command"><span class="ps">kim@portfolio:~$</span> ${esc(raw)}</div>` +
+        `<div class="out-command"><span class="ps">kim@dev:~$</span> ${esc(raw)}</div>` +
         `<div class="out-content"></div>`;
       overlayBody.appendChild(block);
       overlayBody.scrollTop = overlayBody.scrollHeight;
